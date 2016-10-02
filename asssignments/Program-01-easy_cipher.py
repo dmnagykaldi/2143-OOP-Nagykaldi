@@ -16,6 +16,8 @@ class ShiftCipher(object):
 		self.cipherText = None
 		self.cleanText = None
 		self.shift = 3
+		self.simpleText = None
+		self.AlphaNumeric = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9']
 		
 	def __str__(self):
 		return "plainText: %s\ncipherText: %s\ncleanText: %s\nshift: %d\n" % (self.plainText,self.cipherText,self.cleanText,self.shift)
@@ -83,6 +85,18 @@ class ShiftCipher(object):
 		return self.shift
 	
 	"""
+	@ Name: simpleText
+	@ Description: sets simpleText.
+	@ Params:
+	     None
+	"""
+	def setSimpleText(self):
+		self.simpleText = ''
+		for letter in self.plainText:
+			if letter in self.AlphaNumeric:
+				self.simpleText += letter
+
+	"""
 	@ Name: cleanData
 	@ Description: sets cleanText.
 	@ Params:
@@ -90,8 +104,9 @@ class ShiftCipher(object):
 	     encrypted {bool}: False = plaintext True=ciphertext
 	"""	
 	def cleanData(self):
+		self.setSimpleText()
 		self.cleanText = ''
-		for letter in self.plainText:
+		for letter in self.simpleText:
 			if ord(letter) == 32:
 				continue
 			if ord(letter) > 96:
@@ -101,7 +116,7 @@ class ShiftCipher(object):
 
 	"""
 	@ Name: __encrypt
-	@ Description: Encrypts plaintext not ciphertext.
+	@ Description: Encrypts plainText not cipherText.
 	@ Params:
 	     None
 	"""
@@ -110,11 +125,14 @@ class ShiftCipher(object):
 		if(not self.cleanText):
 			return
 		for letter in self.cleanText:
-		    self.cipherText += chr((((ord(letter)-65) + self.shift) % 26)+65)
+			if ord(letter) < 58 and ord(letter) > 47:
+				self.cipherText += letter
+			else:
+				self.cipherText += chr((((ord(letter)-65) + self.shift) % 26)+65)
 	
 	"""
 	@ Name: __decrypt
-	@ Description: Decrypts ciphertext not plaintext.
+	@ Description: Decrypts cipherText not plainText.
 	@ Params:
 	     None
 	"""
@@ -123,7 +141,10 @@ class ShiftCipher(object):
 		if(not self.cipherText):
 			return
 		for letter in self.cipherText:
-			self.plainText += chr((((ord(letter)-65) - self.shift) % 26)+65)
+			if ord(letter) < 58 and ord(letter) > 47:
+				self.plainText += letter
+			else:
+				self.plainText += chr((((ord(letter)-65) - self.shift) % 26)+65)
 
 """
 Only run this if we call this file directly:
