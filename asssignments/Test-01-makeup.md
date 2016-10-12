@@ -259,8 +259,18 @@ Write a class called `myPrimes` that represents a collection of your prime numbe
 ```python
 # place answer here
 # use this as a template for your other answers
-
-
+class myPrimes(object):
+   def __init__(self):
+      primes = []
+   def __addPrime(self,num):
+      if(num.isPrime()):
+         primes.append(num)
+   def removePrime(self,num):
+      if(primes.contain(num)):
+         primes.remove(num)
+   def printPrimes(self):
+      for i in range(len(L)):
+         print primes[i] + ', '
 
 
 ```
