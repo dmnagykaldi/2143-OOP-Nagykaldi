@@ -186,7 +186,9 @@ Your answer should include just the code that loops and creates the new dictiona
 ```python
 # place answer here
 # use this as a template for your other answers
-
+abbr_months = {}
+for i in range(12):
+   abbr_months[i+1] = (months[i].lower())[0:3]
 
 
 
