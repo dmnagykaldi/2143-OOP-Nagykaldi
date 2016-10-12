@@ -221,7 +221,18 @@ When writing your answer, include the entire function definition (without the co
 ```python
 # place answer here
 # use this as a template for your other answers
-
+def miniStats(L):
+   min = L[i]
+   max = L[i]
+   average = 0
+   for i in range(len(L)):
+      if(L[i] < min):
+         min = L[i]
+      if(L[i] > max):
+         max = L[i]
+      average = average + L[i]
+   average = average/len(L)
+   return (min,max,average)
 
 
 
