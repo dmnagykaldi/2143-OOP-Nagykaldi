@@ -133,7 +133,9 @@ Your answer should consist of just the function definition and none of the usage
 ```python
 # place answer here
 # use this as a template for your other answers
-
+def divPrevious(L):
+   for i in range(len(L)):
+      L[i] = L[i]/(i+1)
 
 
 
