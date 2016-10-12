@@ -39,7 +39,31 @@ print "Total Employee %d" % Employee.empCount
 ```python
 # place answer here
 # use this as a template for your other answers
+# Class declaration
+class Employee:
 
+   empCount = 0
+   # Constructor
+   def __init__(self, name, salary):
+      self.name = name
+      self.salary = salary
+      Employee.empCount += 1
+   # Member function
+   def displayCount(self):
+     print "Total Employee %d" % Employee.empCount
+   # Member function
+   def displayEmployee(self):
+      print "Name : ", self.name,  ", Salary: ", self.salary
+
+# Class instance
+emp1 = Employee("Zara", 2000)
+# Class instance
+emp2 = Employee("Manni", 5000)
+
+emp1.displayEmployee()
+emp2.displayEmployee()
+
+print "Total Employee %d" % Employee.empCount
 
 
 
@@ -72,7 +96,17 @@ def addInOrder(L):
 ```python
 # place answer here
 # use this as a template for your other answers
+States.sort()
+def addInOrder(L,item=None):
+    #add to the list L in the proper order
+    i=0
+    while(i < len(L)):
+       if(States[i+1] < item):
+          i = i+1
+    L.insert(i,item)
 
+    #return your ordered list
+    return L
 
 
 
