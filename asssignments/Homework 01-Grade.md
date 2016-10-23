@@ -3,7 +3,7 @@
 |:--------|:-----------------------------------------------------------|:------------|:---------|:---------------|
 | ***1*** | ***General***                                              |             |          |                |
 | -       | Code was on github                                         | pass/fail   |          | ![Alt text][1] |
-| -       | Code could be ran.                                         | pass/fail   |    -50   | ![Alt text][1] |
+| -       | Code could be ran.                                         | pass/fail   |    -20   | ![Alt text][1] |
 | -       | Code was commented                                         |    10       |    10    | ![Alt text][1] |
 | ***2*** | ***Lists***                                                |             |          |                |
 | -       | 1.1 Basics Part A 			                               |    10       |    10    | ![Alt text][1] |
@@ -13,7 +13,7 @@
 | ***3*** | ***Dictionaries***                                         |             |          |                |
 | -       | 2 Part H			                                         |    10       |    0     | ![Alt text][2] |
 | -       | 2 Part I & J                                               |    20       |     0    | ![Alt text][2] |
-|         | Totals:                                                    | **100**     |  **5**   | ![Alt text][2] |
+|         | Totals:                                                    | **100**     |  **35**   | ![Alt text][2] |
 
 ### Comments:
 ```
