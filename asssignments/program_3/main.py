@@ -8,6 +8,8 @@ commands = {}
 for i in range(1,len(sys.argv),2):
     commands[sys.argv[i]] = sys.argv[i+1]
 
-commands['-x'] = commands['-x'].split(',')
+commands['-i'] = commands['-i'].split(',')
 
-ie = ImageEd()
+ie = imageEdit.ImageEd(commands)
+if(commands['-x'] == 'flip'):
+	ie.flip()

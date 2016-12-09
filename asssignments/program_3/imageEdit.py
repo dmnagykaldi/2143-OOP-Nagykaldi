@@ -44,8 +44,8 @@ class ImageEd(object):
 		if self.save:
 			self.img.save(self.save_file)
 
-		if self.show:
-			self.img.show()
+		#if self.show:
+			#self.img.show()
 
 	def glass_effect(self):
 		pass
@@ -56,7 +56,7 @@ class ImageEd(object):
 
 		for x in range(self.width):
 			for y in range(self.height):
-				opposite = self.width - y
+				opposite = (self.width) - y
 				rgb = self.img.getpixel((x,y))
 				rgb2 = self.img.getpixel(opposite,y)
 				self.img.putpixel((x,y),rgb2)
@@ -83,15 +83,6 @@ class ImageEd(object):
 		print("Usage: \n   python %s -u url [-o outputfile]\n   python %s -f filename [-s savefile, -show 1]" % (sys.argv[0],sys.argv[0]))
 		print("Example: \n   python %s -u https://s-media-cache-ak0.pinimg.com/originals/05/b3/83/05b3831a2cefe769af2e9e5c877e6cc8.jpg -o negative.jpg -show 1" % (sys.argv[0]))
 		print("   (this would open the url, process it, save it locally in 'negative.jpg' and also open the result")
-
-	# Ummmm run me if this file called directly.
-	if __name__=='__main__':
-		if len(sys.argv) < 3:
-			print_usage()
-			sys.exit(0)
-		else:
-			pic = ImageEd(sys.argv)
-
 
 	# NOT USED but I left it here 
 	def random_color(self):
