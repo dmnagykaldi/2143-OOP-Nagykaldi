@@ -78,7 +78,10 @@ class ImageEd(object):
 			self.img = img
 		
 		kernel = krn
-		ker2 = (kernel-1) * (kernel-1)
+		if(kernel % 2 == 1):
+			ker2 = (kernel-1) * (kernel-1)
+		else:
+			ker2 = kernel * kernel
 		for x in range(kernel,self.width-kernel):
 			for y in range(kernel,self.height-kernel):
 				meanr = 0
@@ -95,16 +98,75 @@ class ImageEd(object):
 		
 		return self.img
 
-	def posterize(self):
-		pass
+	def posterize(self, img=None, snap = 64):
+		if not img == None:
+			self.img = img
+		
+		for x in range(self.width):
+			for y in range(self.height):
+				color = self.img.getpixel((x,y))
+				r = color[0] % snap
+				g = color[1] % snap
+				b = color[2] % snap
+				if r < (snap // 2):
+					newr = color[0] - r
+				else:
+					newr = color[0] + (snap - r)
+				if g < (snap // 2):
+					newg = color[1] - g
+				else:
+					newg = color[1] + (snap - g)
+				if b < (snap // 2):
+					newb = color[2] - b
+				else:
+					newb = color[2] + (snap - b)
+				self.img.putpixel((x,y),(newr,newg,newb))
+		
+		return self.img
+		
+	def solarize(self, img=None, threshold = 125):
+		if not img == None:
+			self.img = img
+		
+		for x in range(self.width):
+			for y in range(self.height):
+				color = self.img.getpixel((x,y))
+				if(color[0] < threshold):
+					newr = 255 - color[0]
+				else:
+					newr = color[0]
+				if(color[1] < threshold):
+					newg = 255 - color[1]
+				else:
+					newg = color[1]
+				if(color[2] < threshold):
+					newb = 255 - color[2]
+				else:
+					newb = color[2]
+				self.img.putpixel((x,y),(newr,newg,newb))
+		
+		return self.img
 
-	def solarize(self):
-		pass
-
-	def warhol(self):
-		pass
-
-	# NOT USED but I left it here 
-	def random_color(self):
-		return (random.randint(255),random.randint(255),random.randint(255))
+	def warhol(self, img=None, interval = 32):
+		if not img == None:
+			self.img = img
+		
+		for x in range(self.width):
+			for y in range(self.height):
+				color = self.img.getpixel((x,y))
+				avg = (color[0] + color[1] + color[2]) // 3
+				self.img.putpixel((x,y),(avg,avg,avg))
+				
+		self.posterize(snap = interval)
+		war_color = []
+		
+		for i in range(256//interval):
+			war_color.append((random.randint(0,255),random.randint(0,255),random.randint(0,255)))
+			
+		for x in range(self.width):
+			for y in range(self.height):
+				color = self.img.getpixel((x,y))
+				self.img.putpixel((x,y),war_color[color[0]//interval])
+				
+		return self.img
 

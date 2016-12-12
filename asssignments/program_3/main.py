@@ -23,3 +23,15 @@ if(commands['-x'] == 'glass_effect'):
 if(commands['-x'] == 'blur'):
 	blurry = ie.blur()
 	blurry.show()
+
+if(commands['-x'] == 'posterize'):
+	poster = ie.posterize()
+	poster.show()
+	
+if(commands['-x'] == 'solarize'):
+	solar = ie.solarize()
+	solar.show()
+
+if(commands['-x'] == 'warhol'):
+	war = ie.warhol()
+	war.show()
