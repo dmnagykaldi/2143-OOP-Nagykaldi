@@ -44,28 +44,56 @@ class ImageEd(object):
 		if self.save:
 			self.img.save(self.save_file)
 
-		#if self.show:
-			#self.img.show()
-
-	def glass_effect(self):
-		pass
+	def glass_effect(self, img=None, dist = 5):
+		if not img == None:
+			self.img = img
+		
+		distance = dist
+		for x in range(self.width):
+			for y in range(self.height):
+				xnums = [i for i in range(x - distance, x + distance) if i >= 0 and i <= self.width -1]
+				xchoice = random.choice(xnums)
+				ynums = [j for j in range(y - distance, y + distance) if j >= 0 and j <= self.height -1]
+				ychoice = random.choice(ynums)
+				self.img.putpixel((x,y),self.img.getpixel((xchoice,ychoice)))
+				
+		return self.img
 
 	def flip(self,img=None):
 		if not img == None:
 			self.img = img
 
 		for x in range(self.width):
-			for y in range(self.height):
-				opposite = (self.width) - y
+			for y in range(self.height//2):
+				opposite = (self.height - 1) - y
 				rgb = self.img.getpixel((x,y))
-				rgb2 = self.img.getpixel(opposite,y)
+				rgb2 = self.img.getpixel((x,opposite))
 				self.img.putpixel((x,y),rgb2)
-				self.img.putpixel((opposite,y),rgb)
+				self.img.putpixel((x,opposite),rgb)
 
 		return self.img
 
-	def blur(self):
-		pass
+	def blur(self, img=None, krn=5):
+		if not img == None:
+			self.img = img
+		
+		kernel = krn
+		ker2 = (kernel-1) * (kernel-1)
+		for x in range(kernel,self.width-kernel):
+			for y in range(kernel,self.height-kernel):
+				meanr = 0
+				meang = 0
+				meanb = 0
+				for i in range(0-(kernel//2),(kernel//2)):
+					for j in range(0-(kernel//2),(kernel//2)):
+						current = self.img.getpixel((x + i,y + j))
+						meanr += current[0]
+						meang += current[1]
+						meanb += current[2]
+				mean = (meanr//ker2,meang//ker2,meanb//ker2)
+				self.img.putpixel((x,y),mean)
+		
+		return self.img
 
 	def posterize(self):
 		pass
@@ -75,14 +103,6 @@ class ImageEd(object):
 
 	def warhol(self):
 		pass
-
-	# Prints the usage as expected if we don't get enough params
-	# Remember, we are NOT error checking and in the real world, you MUST!
-	def print_usage():
-		print("Error: \n   Url or filename needed")
-		print("Usage: \n   python %s -u url [-o outputfile]\n   python %s -f filename [-s savefile, -show 1]" % (sys.argv[0],sys.argv[0]))
-		print("Example: \n   python %s -u https://s-media-cache-ak0.pinimg.com/originals/05/b3/83/05b3831a2cefe769af2e9e5c877e6cc8.jpg -o negative.jpg -show 1" % (sys.argv[0]))
-		print("   (this would open the url, process it, save it locally in 'negative.jpg' and also open the result")
 
 	# NOT USED but I left it here 
 	def random_color(self):
